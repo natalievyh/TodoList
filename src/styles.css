@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: flex;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./images/space_bg.png");
+    width: 75%;
+    height: 100vh;
+}
+
+.logo {
+    padding: 1rem;
+}
+
+.tasksContainer {
+    width: 92%;
+    background-color: gray;
+    height: 95vh;
+    margin-bottom: 3vh;
+}
+
+.sidebar {
+    width: 25%;
+    background-color: gray;
+}

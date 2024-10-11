@@ -38,3 +38,5 @@ class Project {
         this.tasks.splice(index, 1);
     }
 }
+
+export { Task, Project }

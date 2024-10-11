@@ -3,9 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Plan It!</title>
 </head>
 <body>
+    <div class="sidebar">
+        <button id="newTaskButton">New Task</button>
+        <button id="newProjectButton">New Project</button>
+    </div>
 
+    <div class="mainContainer">
+        <img class="logo" src="./images/logo.png" alt="Plan It Logo">
+        <div class="tasksContainer"></div>
+    </div>
+
+    <dialog class="projectModal">
+        <form class="projectForm">
+            <label for="name">Enter your project name</label>
+            <input type="text" id="name" name="name" placeholder="Apollo 13" autofocus required>
+            <div class="projectFormButtons">
+                <button class="formClose" type="reset">Close</button>
+                <button class="formSubmit" type="submit">Submit</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="taskModal">
+        <form class="taskForm">
+            <fieldset>
+                <legend>Create a New Task</legend>
+                <div class="taskFormContainer">
+                    <div><label for="title">Task Name</label></div>
+                    <input id="title" name="title" type="text" required>
+
+                    <div><label for="description">Task Description</label></div>
+                    <textarea name="description" id="description"></textarea>
+
+                    <div><label for="dueDate">Due Date</label></div>
+                    <input id="dueDate" type="date" name="dueDate" required>
+
+                    <div><label for="priority">Task Priority</label></div>
+                    <select name="priority" id="priority" required>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low" selected>Low</option>
+                    </select>
+                </div>
+                <div class="taskFormButtons">
+                    <button class="taskClose" type="reset">Close</button>
+                    <button class="taskSubmit" type="button">Submit</button>
+                </div>
+            </fieldset>
+        </form>
+    </dialog>
 </body>
 </html>
