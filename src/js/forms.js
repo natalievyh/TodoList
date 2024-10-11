@@ -1,5 +1,11 @@
+import { myProjects } from "./classes"
+import { displayTasks, addProject } from "./dom"
 
-function projectButtonFunctionality() {
+function getProjectByName(projectName) {
+    return myProjects.find(project => project.name === projectName);
+}
+
+function projectFormFunctionality() {
     const projectModal = document.querySelector('.projectModal');
     const newProject = document.querySelector('#newProjectButton');
     const close = document.querySelector('.formClose');
@@ -17,14 +23,13 @@ function projectButtonFunctionality() {
         event.preventDefault();
         const projectName = document.querySelector('#name').value.trim();
         projectModal.close();
-        addProject(projectName);
+        const project = addProject(projectName);
         document.querySelector('.projectForm').reset();
-        displayProjects();
-        displayTasks();
+        displayTasks(project);
     })
 }
 
-function taskButtonFunctionality() {
+function taskFormFunctionality() {
     const taskModal = document.querySelector('.taskModal');
     const newTask = document.querySelector('#newTaskButton');
     const close = document.querySelector('.taskClose');
@@ -44,14 +49,15 @@ function taskButtonFunctionality() {
         const description = document.querySelector("#description").value.trim();
         const dueDate = document.querySelector("#dueDate").value;
         const priority = document.querySelector("#priority").value;
+        const projectName = document.querySelector("#projectSelector").value;
+        const project = getProjectByName(projectName);
         taskModal.close();
-        addTask(title, description, dueDate, priority);
+        project.addTask(title, description, dueDate, priority);
         document.querySelector('.taskForm').reset();
-        displayTasks();
+        displayTasks(project);
     })
 }
 
 
-
-projectButtonFunctionality();
-taskButtonFunctionality();
+projectFormFunctionality();
+taskFormFunctionality();

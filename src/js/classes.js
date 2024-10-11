@@ -1,17 +1,25 @@
+const myProjects = [];
+
 class Task {
-    constructor (title, description, dueDate, priority) {
+    constructor (title, description, dueDate, priority, project) {
         this.title = title,
         this.description = description,
         this.dueDate = dueDate,
         this.priority = priority,
-        this.isCompleted = false
+        this.isCompleted = false,
+        this.project = project;
     }
 
-    edit (title, description, dueDate, priority) {
+    edit (title, description, dueDate, priority, project) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        if (this.project !== project) {
+            this.project.removeTask(this);
+            this.project = project;
+            project.tasks.push(this);
+        }
     }
 
     toggleCompletionStatus () {
@@ -30,13 +38,14 @@ class Project {
     }
 
     addTask(title, description, dueDate, priority) {
-        let task = new Task(title, description, dueDate, priority);
+        let task = new Task(title, description, dueDate, priority, this);
         this.tasks.push(task);
     }
 
-    removeTask(index) {
+    removeTask(task) {
+        const index = tasks.indexOf(task);
         this.tasks.splice(index, 1);
     }
 }
 
-export { Task, Project }
+export { Task, Project, myProjects }

@@ -1,2 +1,5 @@
 import "../styles.css"
-import "./addTask"
+import "./forms"
+import { addProject } from "./dom"
+
+addProject("Apollo 13");

@@ -9,6 +9,7 @@
     <div class="sidebar">
         <button id="newTaskButton">New Task</button>
         <button id="newProjectButton">New Project</button>
+        <div class="projectsContainer"></div>
     </div>
 
     <div class="mainContainer">
@@ -43,10 +44,12 @@
 
                     <div><label for="priority">Task Priority</label></div>
                     <select name="priority" id="priority" required>
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low" selected>Low</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low" selected>Low</option>
                     </select>
+                    <div><label for="project">Project</label></div>
+                    <select name="project" id="projectSelector" required></select>
                 </div>
                 <div class="taskFormButtons">
                     <button class="taskClose" type="reset">Close</button>
