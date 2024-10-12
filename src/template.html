@@ -7,14 +7,75 @@
 </head>
 <body>
     <div class="sidebar">
-        <button id="newTaskButton">New Task</button>
-        <button id="newProjectButton">New Project</button>
-        <div class="projectsContainer"></div>
+        <p>Welcome Aboard,</p>
+        <div class="username">
+            <img src="./icons/profile.png" alt="user profile icon" class="userImg">
+            <h2>Natalie</h2>
+        </div>
+        <button class="newTaskButton">
+            <img src="./icons/plus.png" alt="plus circle icon">
+            <h2>New Task</h2>
+        </button>
+        <div class="viewTasksDiv">
+            <div class="viewTitle">
+                <img id="yellowStars" src="./images/stars.png" alt="yellow stars">
+                <h2>View Tasks</h2>
+            </div>
+            <div class="viewContainer">
+                <div class="tasksCategory">
+                    <img src="./icons/list.png">
+                    <h2>All Tasks</h2>
+                </div>
+                <div class="tasksCategory">
+                    <img src="./icons/calendar.png">
+                    <h2>Today</h2>
+                </div>
+                <div class="tasksCategory">
+                    <img src="./icons/calendar.png">
+                    <h2>This Week</h2>
+                </div>
+                <div class="tasksCategory">
+                    <img src="./icons/calendar.png">
+                    <h2>Upcoming</h2>
+                </div>
+                <div class="tasksCategory">
+                    <img src="./icons/error.png">
+                    <h2>Overdue</h2>
+                </div>
+                <div class="tasksCategory">
+                    <img src="./icons/star.png">
+                    <h2>Completed</h2>
+                </div>
+            </div>
+        </div>
+        <button class="newProjectButton">
+            <img src="./icons/folder.png" alt="plus folder icon">
+            <h2>New Project</h2>
+        </button>
+        <div class="viewProjectsDiv">
+            <div class="viewTitle">
+                <img id="yellowStars" src="./images/stars.png" alt="yellow stars">
+                <h2>View Projects</h2>
+            </div>
+            <div class="viewContainer" id="projectsContainer"></div>
+        </div>
     </div>
 
-    <div class="mainContainer">
+    <div class="wrapper">
         <img class="logo" src="./images/logo.png" alt="Plan It Logo">
-        <div class="tasksContainer"></div>
+        <div class="mainContainer">
+            <div class="projectNameDiv">
+                <img src="./images/stars.png" alt="yellow stars">
+                <h2 id="projectTitle">All Tasks</h2>
+            </div>
+            <div class="tasksWrapper">
+                <div class="tasksContainer"></div>
+                <button class="newTaskButton">
+                    <img src="./icons/plus.png" alt="plus circle icon">
+                    <h2>New Task</h2>
+                </button>
+            </div>
+        </div>
     </div>
 
     <dialog class="projectModal">

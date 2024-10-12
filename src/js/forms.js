@@ -1,10 +1,10 @@
-import { myProjects, Project } from "./classes"
+import { myProjects } from "./classes"
 import { displayTasks, addProject } from "./dom"
 import { saveProjectsLocally } from "./storage";
 
 function projectFormFunctionality() {
     const projectModal = document.querySelector('.projectModal');
-    const newProject = document.querySelector('#newProjectButton');
+    const newProject = document.querySelector('.newProjectButton');
     const close = document.querySelector('.formClose');
     const submit = document.querySelector('.formSubmit');
 
@@ -29,7 +29,7 @@ function projectFormFunctionality() {
 
 function taskFormFunctionality() {
     const taskModal = document.querySelector('.taskModal');
-    const newTask = document.querySelector('#newTaskButton');
+    const newTask = document.querySelector('.newTaskButton');
     const close = document.querySelector('.taskClose');
     const submit = document.querySelector('.taskSubmit');
 

@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: "Crimson Pro", serif;
+    color: var(--lightGray);
+
+}
+
+:root {
+    --darkGray: #1E1D20;
+    --gray: #24222A;
+    --lightGray: #C5C7D4;
+    --yellow: #E5D9A9;
+    --lightBorder: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    margin: 0;
+    display: flex;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../images/space_bg.png");
+    width: 75%;
+    height: 100vh;
+}
+
+.logo {
+    padding: 1rem;
+}
+
+.mainContainer {
+    width: 92%;
+    background-color: var(--gray);
+    height: 95vh;
+    margin-bottom: 3vh;
+    border: 1px solid var(--lightBorder);
+    border-radius: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 2rem;
+}
+
+.projectNameDiv {
+    display: flex;
+    align-items: center;
+    background-color: var(--gray);
+    font-size: 2.2rem;
+    padding: 0 1rem;
+    position: sticky;
+    top: 0; 
+}
+
+.projectNameDiv img {
+    width:8rem;
+}
+
+.tasksContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+}
+
+.taskDiv {
+    background-color: var(--darkGray);
+    padding: 2rem;
+    margin: 0 2rem;
+    border-radius: 8px;
+}
+
+.headerDiv {
+    background-color: var(--gray);
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+    border-radius: 6px;
+}
+
+.taskTitle {
+    color: var(--lightGray);
+    font-family: "Crimson Pro", serif;
+    font-size: 1.7rem;
+}
+
+.taskInfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.taskDescription, .taskDueDate, .taskPriority {
+    font-size: 1.5rem;
+}
+
+.taskDueDate, .taskPriority {
+    margin: 0;
+}
+
+.task:hover .taskDescription {
+    display: block;
+}
+
+#taskCheckbox {
+    margin-right: 1.5rem;
+    cursor: pointer;
+}
+
+.buttonDiv {
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--darkGray);
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--yellow);
+}

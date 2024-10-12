@@ -1,5 +1,6 @@
-import "../styles.css"
+import "../css/main.css"
+import "../css/sidebar.css"
 import "./forms"
-import { initializeApp } from "./storage";
+import { displayAllTasks } from "./storage";
 
-initializeApp();
+displayAllTasks();

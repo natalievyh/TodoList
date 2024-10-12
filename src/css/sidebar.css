@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+    font-family: "Crimson Pro", serif;
+    color: var(--lightGray);
+
+}
+
+:root {
+    --darkGray: #1E1D20;
+    --gray: #24222A;
+    --lightGray: #C5C7D4;
+    --yellow: #E5D9A9;
+}
+
+.sidebar {
+    width: 25%;
+    background-color: var(--gray);
+    border-right: 1px solid var(--lightBorder);
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0 2rem 2rem;
+    height: 100vh;
+}
+
+.username {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+
+.userImg {
+    align-self: center;
+    flex: 0 1 auto;
+    margin-left: 2rem;
+}
+
+p {
+    font-size: 1.7rem;
+}
+
+h2 {
+    margin: 0;
+    font-weight: 500;
+}
+
+.newTaskButton, .newProjectButton {
+    display: flex;
+    width: 95%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--yellow);
+    border-radius: 24px;
+    border: 0;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    cursor: pointer;
+}
+
+.newTaskButton h2, .newProjectButton h2 {
+    color: var(--gray);
+    font-size: 2rem;
+}
+
+.viewTasksDiv, .viewProjectsDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.viewTitle {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.5rem;
+    font-size: 1.6rem;
+    margin-top: 0.5rem;
+}
+
+#yellowStars {
+    width: 6rem;
+}
+
+.viewContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: var(--darkGray);
+    padding: 1rem;
+    border-radius: 10px;
+    width: 90%;
+}
+
+.tasksCategory {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--gray);
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
