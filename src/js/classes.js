@@ -1,13 +1,12 @@
 const myProjects = [];
 
 class Task {
-    constructor (title, description, dueDate, priority, project) {
+    constructor (title, description, dueDate, priority) {
         this.title = title,
         this.description = description,
         this.dueDate = dueDate,
         this.priority = priority,
-        this.isCompleted = false,
-        this.project = project;
+        this.isCompleted = false
     }
 
     edit (title, description, dueDate, priority, project) {
@@ -38,7 +37,7 @@ class Project {
     }
 
     addTask(title, description, dueDate, priority) {
-        let task = new Task(title, description, dueDate, priority, this);
+        let task = new Task(title, description, dueDate, priority);
         this.tasks.push(task);
     }
 

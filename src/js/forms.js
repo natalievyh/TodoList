@@ -1,9 +1,6 @@
-import { myProjects } from "./classes"
+import { myProjects, Project } from "./classes"
 import { displayTasks, addProject } from "./dom"
-
-function getProjectByName(projectName) {
-    return myProjects.find(project => project.name === projectName);
-}
+import { saveProjectsLocally } from "./storage";
 
 function projectFormFunctionality() {
     const projectModal = document.querySelector('.projectModal');
@@ -24,6 +21,7 @@ function projectFormFunctionality() {
         const projectName = document.querySelector('#name').value.trim();
         projectModal.close();
         const project = addProject(projectName);
+        saveProjectsLocally(myProjects);
         document.querySelector('.projectForm').reset();
         displayTasks(project);
     })
@@ -50,9 +48,10 @@ function taskFormFunctionality() {
         const dueDate = document.querySelector("#dueDate").value;
         const priority = document.querySelector("#priority").value;
         const projectName = document.querySelector("#projectSelector").value;
-        const project = getProjectByName(projectName);
+        const project = myProjects.find(p => p.name === projectName);
         taskModal.close();
         project.addTask(title, description, dueDate, priority);
+        saveProjectsLocally(myProjects);
         document.querySelector('.taskForm').reset();
         displayTasks(project);
     })

@@ -1,5 +1,5 @@
 import "../styles.css"
 import "./forms"
-import { addProject } from "./dom"
+import { initializeApp } from "./storage";
 
-addProject("Apollo 13");
+initializeApp();

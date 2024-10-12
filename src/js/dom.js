@@ -18,10 +18,6 @@ function displayTasks(project) {
 }
 
 function addProject(name) {
-    const projectSelector = document.querySelector("#projectSelector");
-    const option = document.createElement("option");
-    option.textContent = name;
-    projectSelector.appendChild(option);
     const project = new Project(name);
     myProjects.push(project);
     addProjectToPage(project);
@@ -59,6 +55,12 @@ function addProjectToPage(project) {
     const projectsContainer = document.querySelector(".projectsContainer")
     const projectName = document.createElement("p");
     projectName.textContent = project.name;
+
+    const projectSelector = document.querySelector("#projectSelector");
+    const option = document.createElement("option");
+    option.textContent = project.name;
+
+    projectSelector.appendChild(option);
     projectsContainer.appendChild(projectName);
 }
 
