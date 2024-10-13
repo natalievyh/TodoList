@@ -1,17 +1,29 @@
 import { myProjects, Project } from "./classes"
 import editButton from "../icons/edit.png"
 import deleteButton from "../icons/delete.png"
+import { saveProjectsLocally } from "./storage";
+import { removeTaskFromCategories } from "./taskCategories";
 
-function clearTasks(project) {
+function clearTasks() {
     document.querySelector(".tasksContainer")
             .innerHTML = "";
 }
 
+function clearProjects() {
+    document.querySelector("#projectsContainer")
+            .innerHTML = "";
+}
+
 function displayTasks(project) {
-    clearTasks(project);
+    clearTasks();
     const tasks = project.tasks;
     displayProjectName(project.name);
-    tasks.forEach((task) => { addTasktoPage(task) });
+    tasks.forEach((task) => { addTasktoPage(task, project) });
+}
+
+function displayProjects(projects) {
+    clearProjects();
+    projects.forEach((project) => { addProjectToPage(project) });
 }
 
 function addProject(name) {
@@ -26,7 +38,7 @@ function displayProjectName(name) {
     projectName.textContent = name;
 }
     
-function addTasktoPage(task) {
+function addTasktoPage(task, project) {
     const tasksContainer = document.querySelector(".tasksContainer");
     const taskDiv = document.createElement("div");
     taskDiv.className = "taskDiv";
@@ -62,8 +74,8 @@ function addTasktoPage(task) {
     headerDiv.appendChild(buttonDiv);
 
     checkbox.addEventListener("click", () => { task.toggleCompletionStatus() });
-    editBtn.addEventListener("click", () => { editTask(task) });
-    deleteBtn.addEventListener("click", () => { deleteTask(task) });
+    editBtn.addEventListener("click", () => { editTask(task, project) });
+    deleteBtn.addEventListener("click", () => { deleteTask(task, project) });
 
     const description = document.createElement("p");
     description.className = "taskDescription";
@@ -90,17 +102,65 @@ function addTasktoPage(task) {
 
 }
 
-function addProjectToPage(project) {
-    const projectsContainer = document.querySelector("#projectsContainer")
-    const projectName = document.createElement("p");
-    projectName.textContent = project.name;
-
+function addProjectToSelector(project) {
     const projectSelector = document.querySelector("#projectSelector");
     const option = document.createElement("option");
     option.textContent = project.name;
-
     projectSelector.appendChild(option);
-    projectsContainer.appendChild(projectName);
 }
 
-export { displayTasks, addProject, addTasktoPage, addProjectToPage }
+function addProjectToPage(project) {
+    const projectsContainer = document.querySelector("#projectsContainer")
+    const projectDiv = document.createElement("div");
+    projectDiv.className = "headerDiv";
+    projectDiv.id = "projectName";
+    
+    const projectName = document.createElement("p");
+    projectName.textContent = project.name;
+
+    const editBtn = document.createElement("img");
+    editBtn.src = editButton;
+
+    const deleteBtn = document.createElement("img");
+    deleteBtn.src = deleteButton;
+
+    const buttonDiv = document.createElement("div");
+    buttonDiv.className = "buttonDiv";
+    
+    buttonDiv.appendChild(editBtn);
+    buttonDiv.appendChild(deleteBtn);
+
+    projectDiv.appendChild(projectName);
+    projectDiv.appendChild(buttonDiv);
+    projectsContainer.appendChild(projectDiv);
+
+    projectDiv.addEventListener("click", () => { displayTasks(project) });
+    editBtn.addEventListener("click", () => { editProject(project) });
+    deleteBtn.addEventListener("click", () => { deleteProject(project) });
+
+    addProjectToSelector(project);
+}
+
+function editTask(task) {
+    
+}
+
+function deleteTask(task, project) {
+    project.removeTask(task);
+    removeTaskFromCategories(task);
+    saveProjectsLocally(myProjects);
+    displayTasks(project);
+}
+
+function editProject(project) {
+
+}
+
+function deleteProject(project) {
+    const index = myProjects.indexOf(project.name);
+    myProjects.splice(index, 1);
+    saveProjectsLocally(myProjects);
+    displayProjects(myProjects);
+}
+
+export { displayTasks, displayProjects, addProject, addTasktoPage }

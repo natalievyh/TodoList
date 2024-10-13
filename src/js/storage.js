@@ -1,5 +1,6 @@
 import { myProjects, Project, Task } from "./classes";
-import { addTasktoPage, addProjectToPage } from "./dom";
+import { displayProjects, displayTasks } from "./dom";
+import { allTasks, initializeCategories } from "./taskCategories";
 
 function saveProjectsLocally(projects) {
     localStorage.setItem("projects", JSON.stringify(projects));
@@ -12,6 +13,7 @@ function loadProjectsFromLocalStorage() {
         const parsedProjects = JSON.parse(projectsData);
         const projects = parsedProjects.map(projectObj => {
             const project = new Project(projectObj.name); 
+            project.tasks = new Project(projectObj.name); 
             project.tasks = projectObj.tasks.map(taskObj => new Task(
                 taskObj.title, 
                 taskObj.description, 
@@ -26,13 +28,18 @@ function loadProjectsFromLocalStorage() {
 }
 
 
-function displayAllTasks() {
+function initializePage() {
     const projects = loadProjectsFromLocalStorage();
     projects.forEach(project => {
         myProjects.push(project);
-        addProjectToPage(project);
-        project.tasks.forEach((task) => { addTasktoPage(task) });
+        project.tasks.forEach((task) => { 
+            allTasks.tasks.push(task);
+        });
     });
+    displayTasks(allTasks);
+    displayProjects(myProjects);
+    initializeCategories(allTasks);
 }
 
-export { displayAllTasks, saveProjectsLocally }
+
+export { initializePage, saveProjectsLocally }

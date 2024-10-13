@@ -68,7 +68,7 @@ body {
 
 .taskDiv {
     background-color: var(--darkGray);
-    padding: 2rem;
+    padding: 1rem;
     margin: 0 2rem;
     border-radius: 8px;
 }
@@ -77,8 +77,10 @@ body {
     background-color: var(--gray);
     display: flex;
     justify-content: space-between;
-    padding: .5rem 1rem;
+    align-items: center;
+    padding: .3rem 1rem;
     border-radius: 6px;
+    overflow: hidden;
 }
 
 .taskTitle {
@@ -90,6 +92,7 @@ body {
 .taskInfo {
     display: flex;
     justify-content: space-between;
+    padding: 0 1rem;
 }
 
 .taskDescription, .taskDueDate, .taskPriority {
@@ -100,8 +103,8 @@ body {
     margin: 0;
 }
 
-.task:hover .taskDescription {
-    display: block;
+.taskDescription {
+    margin: 1rem;
 }
 
 #taskCheckbox {
@@ -130,4 +133,5 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background-color: var(--yellow);
+    cursor: pointer;
 }

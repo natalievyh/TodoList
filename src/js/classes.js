@@ -42,7 +42,7 @@ class Project {
     }
 
     removeTask(task) {
-        const index = tasks.indexOf(task);
+        const index = this.tasks.indexOf(task);
         this.tasks.splice(index, 1);
     }
 }

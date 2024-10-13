@@ -1,6 +1,7 @@
 import { myProjects } from "./classes"
 import { displayTasks, addProject } from "./dom"
-import { saveProjectsLocally } from "./storage";
+import { saveProjectsLocally } from "./storage"
+import { updateCategories, allTasks } from "./taskCategories"
 
 function projectFormFunctionality() {
     const projectModal = document.querySelector('.projectModal');
@@ -29,13 +30,13 @@ function projectFormFunctionality() {
 
 function taskFormFunctionality() {
     const taskModal = document.querySelector('.taskModal');
-    const newTask = document.querySelector('.newTaskButton');
+    const newTaskBtns = document.querySelectorAll('.newTaskButton');
     const close = document.querySelector('.taskClose');
     const submit = document.querySelector('.taskSubmit');
 
-    newTask.addEventListener("click", () => {
-        taskModal.showModal();
-    })
+    newTaskBtns.forEach((newTaskBtn) => 
+        newTaskBtn.addEventListener("click", () => { taskModal.showModal() }
+    ));
 
     close.addEventListener('click', () => {
         taskModal.close();
@@ -51,6 +52,8 @@ function taskFormFunctionality() {
         const project = myProjects.find(p => p.name === projectName);
         taskModal.close();
         project.addTask(title, description, dueDate, priority);
+        allTasks.tasks.push(task);
+        updateCategories(task);
         saveProjectsLocally(myProjects);
         document.querySelector('.taskForm').reset();
         displayTasks(project);

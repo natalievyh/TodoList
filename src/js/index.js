@@ -1,6 +1,8 @@
 import "../css/main.css"
 import "../css/sidebar.css"
 import "./forms"
-import { displayAllTasks } from "./storage";
+import { initializePage } from "./storage";
+import { addCategoryBtns } from "./taskCategories";
 
-displayAllTasks();
+initializePage();
+addCategoryBtns();
