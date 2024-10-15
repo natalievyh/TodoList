@@ -1,52 +1,36 @@
 import { Project } from "./classes";
 import { displayTasks } from "./dom";
+import { differenceInCalendarDays } from "date-fns";
+import { saveCategoriesLocally } from "./storage";
 
 const allTasks = new Project("All Tasks");
 const todaysTasks = new Project("Today");
 const thisWeeksTasks = new Project("This Week");
 const upcomingTasks = new Project("Upcoming");
 const overdueTasks = new Project("Overdue");
-const completedTasks = new Project("Completed");
-
+const myCategories = [allTasks, todaysTasks, thisWeeksTasks, upcomingTasks, overdueTasks]
 
 function initializeCategories(allTasks) {
     allTasks.tasks.forEach((task) => {
         updateCategories(task);
     });
-}
-
-/* 
-@returns: 1 if due today, 2 if due this week, 
-    3 if due after this week, and 4 if overdue
-*/
-function dueBy(dueDate) {
-    const today = new Date();
-    const taskDue = new Date(dueDate);
-    const oneDayInMs = 24 * 60 * 60 * 1000;
-    
-    const diffInMs = taskDue - today;
-    const diffInDays = Math.floor(diffInMs / oneDayInMs);
-    
-    if (diffInDays === 0) {
-        return 1; // Due today
-    } else if (diffInDays > 0 && diffInDays <= 7) {
-        return 2; // Due this week
-    } else if (diffInDays > 7) {
-        return 3; // Upcoming
-    } else {
-        return 4; // Overdue
-    }
+    saveCategoriesLocally(myCategories)
 }
 
 function updateCategories(task) {
-    if (dueBy(task.dueDate) == 1) {
-        todaysTasks.tasks.push(task);
-    } else if (dueBy(task.dueDate) == 2) {
-        thisWeeksTasks.tasks.push(task);
-    } else if (dueBy(task.dueDate) == 3) {
-        upcomingTasks.tasks.push(task);
-    } else {
+    const today = new Date();
+    const taskDue = new Date(task.dueDate.replace(/-/g, '/'));
+    const diffInDays = differenceInCalendarDays(taskDue, today);
+    if (diffInDays < 0) {
         overdueTasks.tasks.push(task);
+    } else {
+        upcomingTasks.tasks.push(task);
+        if (diffInDays === 0) {
+            todaysTasks.tasks.push(task);
+        } 
+        if (diffInDays <= 7) {
+            thisWeeksTasks.tasks.push(task);
+        }
     }
 }
 
@@ -54,18 +38,19 @@ function removeTaskFromCategories(task) {
     removeTaskFromAllTasks(task);
     let category;
     if (todaysTasks.tasks.includes(task)) {
-        category = todaysTasks.tasks;
+        category = todaysTasks;
     } else if (thisWeeksTasks.tasks.includes(task)) {
-        category = thisWeeksTasks.tasks;
+        category = thisWeeksTasks;
     } else if (upcomingTasks.tasks.includes(task)) {
-        category = upcomingTasks.tasks;
+        category = upcomingTasks;
     } else {
-        category = overdueTasks.tasks;
+        category = overdueTasks;
     }
-    const index = category.indexOf(task);
+    const index = category.tasks.indexOf(task);
     if (index !== -1) {
-        category.splice(index, 1);
+        category.tasks.splice(index, 1);
     }
+    saveCategoriesLocally(myCategories);
 }
 
 function removeTaskFromAllTasks(task) {
@@ -77,17 +62,15 @@ function removeTaskFromAllTasks(task) {
 
 function addCategoryBtns() {
     document.querySelector("#all")
-            .addEventListener("click", () => displayTasks(allTasks));
+            .addEventListener("click", () => displayTasks(allTasks.tasks, allTasks));
     document.querySelector("#today")
-            .addEventListener("click", () => displayTasks(todaysTasks));
+            .addEventListener("click", () => displayTasks(todaysTasks.tasks, todaysTasks));
     document.querySelector("#week")
-            .addEventListener("click", () => displayTasks(thisWeeksTasks));
+            .addEventListener("click", () => displayTasks(thisWeeksTasks.tasks, thisWeeksTasks));
     document.querySelector("#upcoming")
-            .addEventListener("click", () => displayTasks(upcomingTasks));
+            .addEventListener("click", () => displayTasks(upcomingTasks.tasks, upcomingTasks));
     document.querySelector("#overdue")
-            .addEventListener("click", () => displayTasks(overdueTasks));
-    document.querySelector("#completed")
-            .addEventListener("click", () => displayTasks(completedTasks));
+            .addEventListener("click", () => displayTasks(overdueTasks.tasks, overdueTasks));
 }
 
 export { allTasks, initializeCategories, removeTaskFromCategories, updateCategories, addCategoryBtns }

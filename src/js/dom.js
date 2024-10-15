@@ -3,6 +3,9 @@ import editButton from "../icons/edit.png"
 import deleteButton from "../icons/delete.png"
 import { saveProjectsLocally } from "./storage";
 import { removeTaskFromCategories } from "./taskCategories";
+import { editProject, editTask } from "./forms";
+import { format } from "date-fns";
+import { sortFunctionality } from "./sort";
 
 function clearTasks() {
     document.querySelector(".tasksContainer")
@@ -14,11 +17,16 @@ function clearProjects() {
             .innerHTML = "";
 }
 
-function displayTasks(project) {
+function loadProject(tasks, project) {
+    displayTasks(tasks, project); 
+    sortFunctionality(project);
+}
+
+function displayTasks(tasks, project) {
     clearTasks();
-    const tasks = project.tasks;
     displayProjectName(project.name);
     tasks.forEach((task) => { addTasktoPage(task, project) });
+    sortFunctionality(project);
 }
 
 function displayProjects(projects) {
@@ -47,10 +55,10 @@ function addTasktoPage(task, project) {
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.id = 'taskCheckbox';
+    checkbox.id = `taskCheckbox-${task.title}`;
 
     const label = document.createElement('label');
-    label.htmlFor = 'taskCheckbox';
+    label.htmlFor = `taskCheckbox-${task.title}`;
     label.textContent = task.title;
     label.className = "taskTitle";
 
@@ -86,7 +94,9 @@ function addTasktoPage(task, project) {
 
     const dueDate = document.createElement("p");
     dueDate.className = "taskDueDate";
-    dueDate.textContent = `Due Date: ${task.dueDate}`;
+    const date = new Date(task.dueDate.replace(/-/g, '/'));
+    const formattedDate = format(date, 'MM/dd/yyyy');
+    dueDate.textContent = `Due: ${formattedDate}`;
 
     const priority = document.createElement("p");
     priority.className = "taskPriority";
@@ -134,26 +144,18 @@ function addProjectToPage(project) {
     projectDiv.appendChild(buttonDiv);
     projectsContainer.appendChild(projectDiv);
 
-    projectDiv.addEventListener("click", () => { displayTasks(project) });
+    projectDiv.addEventListener("click", () => { loadProject(project.tasks, project) });
     editBtn.addEventListener("click", () => { editProject(project) });
     deleteBtn.addEventListener("click", () => { deleteProject(project) });
 
     addProjectToSelector(project);
 }
 
-function editTask(task) {
-    
-}
-
 function deleteTask(task, project) {
     project.removeTask(task);
     removeTaskFromCategories(task);
     saveProjectsLocally(myProjects);
-    displayTasks(project);
-}
-
-function editProject(project) {
-
+    displayTasks(project.tasks, project);
 }
 
 function deleteProject(project) {
@@ -163,4 +165,4 @@ function deleteProject(project) {
     displayProjects(myProjects);
 }
 
-export { displayTasks, displayProjects, addProject, addTasktoPage }
+export { displayTasks, displayProjects, addProject, addTasktoPage, deleteTask, clearTasks, loadProject }

@@ -9,15 +9,14 @@ class Task {
         this.isCompleted = false
     }
 
-    edit (title, description, dueDate, priority, project) {
+    edit (title, description, dueDate, priority, project, newProject) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        if (this.project !== project) {
-            this.project.removeTask(this);
-            this.project = project;
-            project.tasks.push(this);
+        if (project !== newProject) {
+            project.removeTask(this);
+            newProject.tasks.push(this);
         }
     }
 
@@ -36,8 +35,7 @@ class Project {
         this.tasks = [];
     }
 
-    addTask(title, description, dueDate, priority) {
-        let task = new Task(title, description, dueDate, priority);
+    addTask(task) {
         this.tasks.push(task);
     }
 

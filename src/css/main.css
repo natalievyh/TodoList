@@ -48,6 +48,11 @@ body {
 
 .projectNameDiv {
     display: flex;
+    justify-content: space-between;
+}
+
+.projectTitleWrapper {
+    display: flex;
     align-items: center;
     background-color: var(--gray);
     font-size: 2.2rem;
@@ -56,7 +61,7 @@ body {
     top: 0; 
 }
 
-.projectNameDiv img {
+.projectTitleWrapper img {
     width:8rem;
 }
 
@@ -114,6 +119,48 @@ body {
 
 .buttonDiv {
     cursor: pointer;
+}
+
+.sortByDiv {
+    display: flex;
+    gap: 1rem;
+    padding-right: 2rem;
+    align-items: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 12rem;
+}
+
+#dropInput {
+    background-color: var(--darkGray);
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    border: 0;
+    padding: 0.3rem 1.5rem;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    width: 11rem;
+}
+
+
+#dropInput:hover option{
+    display: block;
+    cursor: pointer;
+}
+
+option {
+    display: block;
+    padding: 0.3rem 1rem;
+    font-size: 1.3rem;
+}
+
+option:hover {
+    background-color: var(--lightGray);
+    color: var(--darkGray);
 }
 
 ::-webkit-scrollbar {

@@ -1,7 +1,8 @@
-import { myProjects } from "./classes"
+import { myProjects, Project, Task } from "./classes"
 import { displayTasks, addProject } from "./dom"
 import { saveProjectsLocally } from "./storage"
 import { updateCategories, allTasks } from "./taskCategories"
+import { loadProject } from "./dom"
 
 function projectFormFunctionality() {
     const projectModal = document.querySelector('.projectModal');
@@ -19,12 +20,13 @@ function projectFormFunctionality() {
 
     submit.addEventListener("click", (event) => {
         event.preventDefault();
-        const projectName = document.querySelector('#name').value.trim();
-        projectModal.close();
+        const projectName = document.querySelector('#projectInput').value.trim();
         const project = addProject(projectName);
         saveProjectsLocally(myProjects);
         document.querySelector('.projectForm').reset();
-        displayTasks(project);
+        projectModal.close();
+        loadProject(project.tasks, project);
+
     })
 }
 
@@ -35,7 +37,9 @@ function taskFormFunctionality() {
     const submit = document.querySelector('.taskSubmit');
 
     newTaskBtns.forEach((newTaskBtn) => 
-        newTaskBtn.addEventListener("click", () => { taskModal.showModal() }
+        newTaskBtn.addEventListener("click", () => { 
+            taskModal.showModal() 
+        }
     ));
 
     close.addEventListener('click', () => {
@@ -50,16 +54,35 @@ function taskFormFunctionality() {
         const priority = document.querySelector("#priority").value;
         const projectName = document.querySelector("#projectSelector").value;
         const project = myProjects.find(p => p.name === projectName);
+        if (title === "") {
+            alert("Please enter a title.");
+            return;
+        }
+        if (isNaN(new Date(dueDate))) {
+            alert("Please enter a valid date.");
+            return;
+        }
         taskModal.close();
-        project.addTask(title, description, dueDate, priority);
+        const task = new Task(title, description, dueDate, priority);
+        project.addTask(task);
         allTasks.tasks.push(task);
         updateCategories(task);
         saveProjectsLocally(myProjects);
         document.querySelector('.taskForm').reset();
-        displayTasks(project);
+        displayTasks(project.tasks, project);
     })
 }
 
 
+function editProject(project) {
+    
+}
+
+function editTask(task, project) {
+
+}
+
 projectFormFunctionality();
 taskFormFunctionality();
+
+export { editProject, editTask }

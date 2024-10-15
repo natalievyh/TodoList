@@ -107,9 +107,9 @@ h2 {
     padding: 0.5rem;
     background-color: var(--gray);
     border-radius: 5px;
-    cursor: pointer;
 }
 
-#projectName {
+.tasksCategory:hover, #projectName:hover {
+    background-color: var(--darkGray);
     cursor: pointer;
 }

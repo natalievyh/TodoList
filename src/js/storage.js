@@ -1,9 +1,14 @@
 import { myProjects, Project, Task } from "./classes";
-import { displayProjects, displayTasks } from "./dom";
+import { displayProjects } from "./dom";
 import { allTasks, initializeCategories } from "./taskCategories";
+import { loadProject } from "./dom";
 
 function saveProjectsLocally(projects) {
     localStorage.setItem("projects", JSON.stringify(projects));
+}
+
+function saveCategoriesLocally(categories) {
+    localStorage.setItem("categories", JSON.stringify(categories));
 }
 
 function loadProjectsFromLocalStorage() {
@@ -23,8 +28,26 @@ function loadProjectsFromLocalStorage() {
             return project;
         });
         return projects;
-    }
-    return [];
+    } 
+    return [new Project("My Project")];
+}
+
+function loadCategoriesFromLocalStorage() {
+    const categoriesData = localStorage.getItem('categories');
+
+    const parsedCategories = JSON.parse(categoriesData);
+    const categories = parsedCategories.map(categoryObj => {
+        const category = new Project(categoryObj.name); 
+        category.tasks = new Project(categoryObj.name); 
+        category.tasks = categoryObj.tasks.map(taskObj => new Task(
+            taskObj.title, 
+            taskObj.description, 
+            taskObj.dueDate, 
+            taskObj.priority
+        ));
+        return category;
+    });
+    return categories;
 }
 
 
@@ -36,10 +59,10 @@ function initializePage() {
             allTasks.tasks.push(task);
         });
     });
-    displayTasks(allTasks);
-    displayProjects(myProjects);
     initializeCategories(allTasks);
+    loadProject(allTasks.tasks, allTasks);
+    displayProjects(myProjects);
 }
 
 
-export { initializePage, saveProjectsLocally }
+export { initializePage, saveProjectsLocally, saveCategoriesLocally }
