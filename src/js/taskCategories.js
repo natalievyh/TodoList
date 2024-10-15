@@ -1,7 +1,6 @@
 import { Project } from "./classes";
 import { displayTasks } from "./dom";
 import { differenceInCalendarDays } from "date-fns";
-import { saveCategoriesLocally } from "./storage";
 
 const allTasks = new Project("All Tasks");
 const todaysTasks = new Project("Today");
@@ -14,7 +13,6 @@ function initializeCategories(allTasks) {
     allTasks.tasks.forEach((task) => {
         updateCategories(task);
     });
-    saveCategoriesLocally(myCategories)
 }
 
 function updateCategories(task) {
@@ -50,7 +48,6 @@ function removeTaskFromCategories(task) {
     if (index !== -1) {
         category.tasks.splice(index, 1);
     }
-    saveCategoriesLocally(myCategories);
 }
 
 function removeTaskFromAllTasks(task) {

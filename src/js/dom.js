@@ -67,9 +67,11 @@ function addTasktoPage(task, project) {
     titleDiv.appendChild(label);
 
     const editBtn = document.createElement("img");
+    editBtn.className = "icon";
     editBtn.src = editButton;
 
     const deleteBtn = document.createElement("img");
+    deleteBtn.className = "icon";
     deleteBtn.src = deleteButton;
 
     const buttonDiv = document.createElement("div");
@@ -129,9 +131,11 @@ function addProjectToPage(project) {
     projectName.textContent = project.name;
 
     const editBtn = document.createElement("img");
+    editBtn.className = "icon";
     editBtn.src = editButton;
 
     const deleteBtn = document.createElement("img");
+    deleteBtn.className = "icon";
     deleteBtn.src = deleteButton;
 
     const buttonDiv = document.createElement("div");

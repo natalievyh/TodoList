@@ -13,6 +13,7 @@
     --lightGray: #C5C7D4;
     --yellow: #E5D9A9;
     --lightBorder: rgba(255, 255, 255, 0.05);
+    font-size: 11px;
 }
 
 body {
@@ -32,6 +33,7 @@ body {
 
 .logo {
     padding: 1rem;
+    height: 16vh;
 }
 
 .mainContainer {
