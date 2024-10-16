@@ -1,4 +1,4 @@
-import { myProjects, Project, Task } from "./classes"
+import { myProjects, Task } from "./classes"
 import { displayTasks, addProject } from "./dom"
 import { saveProjectsLocally } from "./storage"
 import { updateCategories, allTasks } from "./taskCategories"
@@ -73,9 +73,17 @@ function taskFormFunctionality() {
     })
 }
 
+function projectNameExists(name) {
+    myProjects.forEach((project) => {
+        if (project.name === name) {
+            return true;
+        }
+    });
+    return false;
+}
 
 function editProject(project) {
-    
+
 }
 
 function editTask(task, project) {

@@ -115,7 +115,7 @@ h2 {
     border-radius: 5px;
 }
 
-.tasksCategory:hover, #projectName:hover {
+.tasksCategory:hover, .headerDiv:hover {
     background-color: var(--darkGray);
     cursor: pointer;
 }

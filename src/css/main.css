@@ -191,6 +191,10 @@ option:hover {
     text-decoration: line-through;
 }
 
+.editBtn {
+    display: none;
+}
+
 ::-webkit-scrollbar {
     width: 20px;
   }
