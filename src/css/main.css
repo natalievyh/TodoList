@@ -90,6 +90,11 @@ body {
     overflow: hidden;
 }
 
+.titleDiv {
+    display: flex;
+    gap: 1rem;
+}
+
 .taskTitle {
     color: var(--lightGray);
     font-family: "Crimson Pro", serif;
@@ -114,9 +119,18 @@ body {
     margin: 1rem;
 }
 
-#taskCheckbox {
-    margin-right: 1.5rem;
+.taskCheckbox {
     cursor: pointer;
+    width: 2rem;
+}
+
+.taskCheckbox:hover {
+    content: url("../images/lightMoon.png");
+}
+
+.taskCompleted {
+    width: 2rem;
+    content: url("../images/lightMoon.png");
 }
 
 .buttonDiv {
@@ -163,6 +177,18 @@ option {
 option:hover {
     background-color: var(--lightGray);
     color: var(--darkGray);
+}
+
+.editBtn {
+    display: none;
+}
+
+.taskTitle {
+    text-decoration: none;
+}
+
+.taskTitle.titleStrikethrough {
+    text-decoration: line-through;
 }
 
 ::-webkit-scrollbar {

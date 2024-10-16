@@ -73,7 +73,6 @@
                             <option value="Name">Name</option>
                             <option value="Date">Due Date</option>
                             <option value="Priority">Priority</option>
-                            <option value="Status">Status</option>
                         </select>
                     </div>
                 </div>
@@ -90,8 +89,8 @@
 
     <dialog class="projectModal">
         <form class="projectForm">
-            <label for="projectInput">Enter your project name</label>
-            <input type="text" id="projectInput" name="projectInput" autofocus required>
+            <label for="projectInput" class="projectInputLabel">Enter your project name:</label>
+            <input type="text" class="formInput" name="projectInput" autofocus required>
             <div class="projectFormButtons">
                 <button class="formClose" type="reset">Close</button>
                 <button class="formSubmit" type="submit">Submit</button>
@@ -104,23 +103,26 @@
             <fieldset>
                 <legend>Create a New Task</legend>
                 <div class="taskFormContainer">
-                    <div><label for="title">Task Name</label></div>
-                    <input id="title" name="title" type="text" required>
+                    <div id="taskTitleAndDesc" class="taskInputsDiv"> 
+                        <div><label for="title" class="inputLabel">Title</label></div>
+                        <input id="title" name="title" type="text" class="formInput" required>
 
-                    <div><label for="description">Task Description</label></div>
-                    <textarea name="description" id="description"></textarea>
-
-                    <div><label for="dueDate">Due Date</label></div>
-                    <input id="dueDate" type="date" name="dueDate" required>
-
-                    <div><label for="priority">Task Priority</label></div>
-                    <select name="priority" id="priority" required>
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low" selected>Low</option>
-                    </select>
-                    <div><label for="projectSelector">Project</label></div>
-                    <select name="projectSelector" id="projectSelector" required></select>
+                        <div><label for="description" class="inputLabel">Description</label></div>
+                        <textarea name="description" id="description" class="formInput"></textarea>
+                    </div>
+                    <div id="taskFormOptions" class="taskInputsDiv">
+                        <div><label for="dueDate" class="inputLabel">Due Date</label></div>
+                        <input id="dueDate" type="date" name="dueDate" class="formInput" required>
+    
+                        <div><label for="priority" class="inputLabel">Priority</label></div>
+                        <select name="priority" id="priority" class="formInput" required>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low" selected>Low</option>
+                        </select>
+                        <div><label for="projectSelector" class="inputLabel">Project</label></div>
+                        <select name="projectSelector" id="projectSelector" class="formInput" required></select>
+                    </div>
                 </div>
                 <div class="taskFormButtons">
                     <button class="taskClose" type="reset">Close</button>

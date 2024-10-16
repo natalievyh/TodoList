@@ -33,28 +33,12 @@ function updateCategories(task) {
 }
 
 function removeTaskFromCategories(task) {
-    removeTaskFromAllTasks(task);
-    let category;
-    if (todaysTasks.tasks.includes(task)) {
-        category = todaysTasks;
-    } else if (thisWeeksTasks.tasks.includes(task)) {
-        category = thisWeeksTasks;
-    } else if (upcomingTasks.tasks.includes(task)) {
-        category = upcomingTasks;
-    } else {
-        category = overdueTasks;
-    }
-    const index = category.tasks.indexOf(task);
-    if (index !== -1) {
-        category.tasks.splice(index, 1);
-    }
-}
+    myCategories.forEach(category => {
+        if (category.tasks.includes(task)) {
+            category.removeTask(task);
+        }
+    });
 
-function removeTaskFromAllTasks(task) {
-    const index = allTasks.tasks.indexOf(task);
-    if (index !== -1) {
-        allTasks.tasks.splice(index, 1);
-    }
 }
 
 function addCategoryBtns() {

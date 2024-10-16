@@ -1,8 +1,9 @@
 import { myProjects, Project } from "./classes"
 import editButton from "../icons/edit.png"
 import deleteButton from "../icons/delete.png"
+import darkMoon from "../images/darkMoon.png"
 import { saveProjectsLocally } from "./storage";
-import { removeTaskFromCategories } from "./taskCategories";
+import { allTasks, removeTaskFromCategories } from "./taskCategories";
 import { editProject, editTask } from "./forms";
 import { format } from "date-fns";
 import { sortFunctionality } from "./sort";
@@ -25,13 +26,17 @@ function loadProject(tasks, project) {
 function displayTasks(tasks, project) {
     clearTasks();
     displayProjectName(project.name);
-    tasks.forEach((task) => { addTasktoPage(task, project) });
+    tasks.forEach((task) => { 
+        addTasktoPage(task, project) 
+    });
     sortFunctionality(project);
 }
 
 function displayProjects(projects) {
     clearProjects();
-    projects.forEach((project) => { addProjectToPage(project) });
+    projects.forEach((project) => { 
+        addProjectToPage(project);
+    });
 }
 
 function addProject(name) {
@@ -53,16 +58,16 @@ function addTasktoPage(task, project) {
     const headerDiv = document.createElement("div");
     headerDiv.className = "headerDiv";
 
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.id = `taskCheckbox-${task.title}`;
+    const checkbox = document.createElement('img');
+    checkbox.src = darkMoon;
+    checkbox.className = "taskCheckbox"
 
-    const label = document.createElement('label');
-    label.htmlFor = `taskCheckbox-${task.title}`;
+    const label = document.createElement('p');
     label.textContent = task.title;
     label.className = "taskTitle";
 
     const titleDiv = document.createElement("div");
+    titleDiv.className = "titleDiv";
     titleDiv.appendChild(checkbox);
     titleDiv.appendChild(label);
 
@@ -83,7 +88,11 @@ function addTasktoPage(task, project) {
     headerDiv.appendChild(titleDiv);
     headerDiv.appendChild(buttonDiv);
 
-    checkbox.addEventListener("click", () => { task.toggleCompletionStatus() });
+    checkbox.addEventListener("click", () => { 
+        task.toggleCompletionStatus(); 
+        label.classList.toggle("titleStrikethrough");
+        checkbox.classList.toggle("taskCompleted");
+    });
     editBtn.addEventListener("click", () => { editTask(task, project) });
     deleteBtn.addEventListener("click", () => { deleteTask(task, project) });
 

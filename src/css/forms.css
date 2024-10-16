@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+    font-family: "Crimson Pro", serif;
+    color: var(--lightGray);
+
+}
+
+:root {
+    --darkGray: #1E1D20;
+    --gray: #24222A;
+    --lightGray: #C5C7D4;
+    --yellow: #E5D9A9;
+    --lightBorder: rgba(255, 255, 255, 0.05);
+    font-size: 11px;
+}
+
+.projectModal, .taskModal {
+    background-color: var(--gray);
+    border-radius: 2rem;
+    padding: 3rem;
+    border: 2px solid var(--yellow);
+}
+
+legend {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.formInput {
+    background-color: var(--darkGray);
+    border: 0;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+fieldset {
+    border: 0;
+}
+
+.projectInputLabel {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.inputLabel {
+    font-size: 1.2rem;
+}
+
+.projectFormButtons, .taskFormButtons {
+    display: flex;
+    margin-top: 1rem;
+    gap: 0.5rem;
+}
+
+.formClose, .formSubmit, .taskClose, .taskSubmit {
+    background-color: var(--darkGray);
+    border: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.formClose:hover, .formSubmit:hover, .taskClose:hover, .taskSubmit:hover {
+    background-color: var(--yellow);
+    color: var(--darkGray);
+}
+
+.taskFormContainer {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.taskInputsDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

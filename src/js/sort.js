@@ -4,7 +4,7 @@ const compareStrings = (a, b) => {
     return a.localeCompare(b, undefined, { sensitivity: 'base' });
 }
 
-const compareDates = (a, b) => { new Date(a.dueDate) - new Date(b.dueDate) }
+const compareDates = (a, b) => { new Date(b.dueDate) - new Date(a.dueDate) }
 
 const comparePriority = (a, b) => {
     const priorityOrder = { 'High': 1, 'Medium': 2, 'Low': 3 };
@@ -25,9 +25,6 @@ function sortTasks(sortMode, project) {
                     break;
                 case "Priority":
                     result = comparePriority(a, b); 
-                    break;
-                case "Status":
-                    result = a.isCompleted - b.isCompleted;
                     break;
                 default:
                     return 0;
