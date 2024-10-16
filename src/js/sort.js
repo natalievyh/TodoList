@@ -4,7 +4,11 @@ const compareStrings = (a, b) => {
     return a.localeCompare(b, undefined, { sensitivity: 'base' });
 }
 
-const compareDates = (a, b) => { new Date(b.dueDate) - new Date(a.dueDate) }
+const compareDates = (a, b) => { 
+    const aDate = new Date(a.dueDate.replace(/-/g, '/'));
+    const bDate = new Date(b.dueDate.replace(/-/g, '/'));
+    return aDate - bDate; 
+}
 
 const comparePriority = (a, b) => {
     const priorityOrder = { 'High': 1, 'Medium': 2, 'Low': 3 };

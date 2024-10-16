@@ -1,4 +1,4 @@
-import { Project } from "./classes";
+import { Project, myProjects } from "./classes";
 import { displayTasks } from "./dom";
 import { differenceInCalendarDays } from "date-fns";
 
@@ -41,6 +41,14 @@ function removeTaskFromCategories(task) {
 
 }
 
+function removeTaskFromProjects(task) {
+    myProjects.forEach(project => {
+        if (project.tasks.includes(task)) {
+            project.removeTask(task);
+        }
+    });
+}
+
 function addCategoryBtns() {
     document.querySelector("#all")
             .addEventListener("click", () => displayTasks(allTasks.tasks, allTasks));
@@ -54,4 +62,4 @@ function addCategoryBtns() {
             .addEventListener("click", () => displayTasks(overdueTasks.tasks, overdueTasks));
 }
 
-export { allTasks, initializeCategories, removeTaskFromCategories, updateCategories, addCategoryBtns }
+export { allTasks, myCategories, initializeCategories, removeTaskFromCategories, updateCategories, addCategoryBtns, removeTaskFromProjects }
