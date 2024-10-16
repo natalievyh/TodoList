@@ -3,7 +3,7 @@ import editButton from "../icons/edit.png"
 import deleteButton from "../icons/delete.png"
 import darkMoon from "../images/darkMoon.png"
 import { saveProjectsLocally } from "./storage";
-import { removeTaskFromCategories, removeTaskFromProjects, myCategories } from "./taskCategories";
+import { removeTaskFromCategories, removeTaskFromProjects, myCategories, allTasks } from "./taskCategories";
 import { editProject, editTask } from "./forms";
 import { format } from "date-fns";
 import { sortFunctionality } from "./sort";
@@ -175,6 +175,7 @@ function deleteTask(task, project) {
 }
 
 function deleteProject(project) {
+    project.tasks.forEach((task) => { allTasks.removeTask(task); });
     const index = myProjects.indexOf(project.name);
     myProjects.splice(index, 1);
     saveProjectsLocally(myProjects);
