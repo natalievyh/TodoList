@@ -32,6 +32,14 @@ function displayTasks(tasks, project) {
     sortFunctionality(project);
 }
 
+function redisplayTasks(tasks, project) {
+    clearTasks();
+    displayProjectName(project.name);
+    tasks.forEach((task) => { 
+        addTasktoPage(task, project) 
+    });
+}
+
 function displayProjects(projects) {
     clearProjects();
     projects.forEach((project) => { 
@@ -198,4 +206,4 @@ function deleteProject(project) {
     displayProjects(myProjects);
 }
 
-export { displayTasks, displayProjects, addProject, addTasktoPage, deleteTask, clearTasks, loadProject }
+export { redisplayTasks, displayTasks, displayProjects, addProject, addTasktoPage, deleteTask, clearTasks, loadProject }

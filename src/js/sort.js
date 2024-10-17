@@ -1,4 +1,4 @@
-import { displayTasks } from "./dom";
+import { redisplayTasks } from "./dom";
 
 const compareStrings = (a, b) => {
     return a.localeCompare(b, undefined, { sensitivity: 'base' });
@@ -36,11 +36,13 @@ function sortTasks(sortMode, project) {
             return result;
         });
     }
-    displayTasks(sortedTasks, project);
+    redisplayTasks(sortedTasks, project);
 }
 
 export function sortFunctionality(project) {
     const dropInput = document.querySelector("#dropInput");
+    const sortMode = dropInput.value;        
+    sortTasks(sortMode, project);
 
     dropInput.addEventListener("change", () => {
         const sortMode = dropInput.value;        
