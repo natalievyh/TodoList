@@ -43,6 +43,7 @@ function addProject(name) {
     const project = new Project(name);
     myProjects.push(project);
     addProjectToPage(project);
+    addProjectToSelector(project);
     return project;
 }
 
@@ -65,6 +66,11 @@ function addTasktoPage(task, project) {
     const label = document.createElement('p');
     label.textContent = task.title;
     label.className = "taskTitle";
+
+    if (task.isCompleted) { 
+        label.classList.toggle("titleStrikethrough");
+        checkbox.classList.toggle("taskCompleted"); 
+    }
 
     const titleDiv = document.createElement("div");
     titleDiv.className = "titleDiv";
@@ -131,6 +137,17 @@ function addProjectToSelector(project) {
     projectSelector.appendChild(option);
 }
 
+function removeProjectFromSelector(project) {
+    const projectSelector = document.querySelector("#projectSelector");
+    const optionToRemove = Array.from(projectSelector.options)
+                                .find((option) => option.textContent === project.name);
+    if (optionToRemove) {
+        projectSelector.removeChild(optionToRemove);
+    } else {
+        console.error(`Option not found for project: ${project.name}`);
+    }
+}
+
 function addProjectToPage(project) {
     const projectsContainer = document.querySelector("#projectsContainer")
     const projectDiv = document.createElement("div");
@@ -162,8 +179,6 @@ function addProjectToPage(project) {
     projectDiv.addEventListener("click", () => { loadProject(project.tasks, project) });
     editBtn.addEventListener("click", () => { editProject(project) });
     deleteBtn.addEventListener("click", () => { deleteProject(project) });
-
-    addProjectToSelector(project);
 }
 
 function deleteTask(task, project) {
@@ -176,7 +191,8 @@ function deleteTask(task, project) {
 
 function deleteProject(project) {
     project.tasks.forEach((task) => { allTasks.removeTask(task); });
-    const index = myProjects.indexOf(project.name);
+    removeProjectFromSelector(project);
+    const index = myProjects.indexOf(project);
     myProjects.splice(index, 1);
     saveProjectsLocally(myProjects);
     displayProjects(myProjects);

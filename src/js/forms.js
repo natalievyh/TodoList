@@ -21,6 +21,7 @@ function projectFormFunctionality() {
     submit.addEventListener("click", (event) => {
         event.preventDefault();
         const projectName = document.querySelector('#projectInput').value.trim();
+        if (!validProjectInput(projectName)) { return }
         const project = addProject(projectName);
         saveProjectsLocally(myProjects);
         document.querySelector('.projectForm').reset();
@@ -54,14 +55,7 @@ function taskFormFunctionality() {
         const priority = document.querySelector("#priority").value;
         const projectName = document.querySelector("#projectSelector").value;
         const project = myProjects.find(p => p.name === projectName);
-        if (title === "") {
-            alert("Please enter a title.");
-            return;
-        }
-        if (isNaN(new Date(dueDate))) {
-            alert("Please enter a valid date.");
-            return;
-        }
+        if (!validTaskInput(title, dueDate, projectName)) { return }
         taskModal.close();
         const task = new Task(title, description, dueDate, priority);
         project.addTask(task);
@@ -73,24 +67,39 @@ function taskFormFunctionality() {
     })
 }
 
+function validTaskInput(title, dueDate, projectName) {
+    if (title === "") {
+        alert("Please enter a title.");
+        return false;
+    }
+    if (isNaN(new Date(dueDate))) {
+        alert("Please enter a valid date.");
+        return false;
+    }
+    if (projectName === "") {
+        alert("Project cannot be empty.");
+        return false;
+    }
+    return true;
+}
+
+function validProjectInput(projectName) {
+    if (projectName === "") {
+        alert("Project cannot be empty.");
+        return false;
+    } if (projectNameExists(projectName)) {
+        alert("Please choose a different name.");
+        return false;
+    }
+    return true;
+}
+
 function projectNameExists(name) {
-    myProjects.forEach((project) => {
-        if (project.name === name) {
-            return true;
-        }
-    });
-    return false;
+    return myProjects.some((project) => project.name === name);
 }
 
-function editProject(project) {
-
-}
-
-function editTask(task, project) {
-    
-}
+export function editProject(project) {}
+export function editTask(task, project) {}
 
 projectFormFunctionality();
 taskFormFunctionality();
-
-export { editProject, editTask }
